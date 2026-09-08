@@ -1,0 +1,7 @@
+astropy
+cartopy
+jupyter
+jupytext
+matplotlib
+numpy
+sympy

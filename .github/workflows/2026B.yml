@@ -1,0 +1,35 @@
+name: 2026B
+
+on: [push]
+
+jobs:
+  build-linux:
+    runs-on: ubuntu-latest
+    strategy:
+      max-parallel: 5
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.12"
+
+    - name: Install Python dependencies
+      run: |
+        cd 2026B
+        if [ -f requirements.txt ]; then
+          pip install -r requirements.txt
+        fi
+
+    - name: Run publish script
+      run: |
+        cd 2026B
+        python publish.py 2026B.py
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v7
+      with:
+        name: 2026B-build
+        path: 2026B
